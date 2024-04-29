@@ -8,9 +8,9 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 app = Flask(__name__)
 
-# @app.route("/", methods=["GET"])
-# def mbsa():
-#     return render_template('index.html')
+@app.route("/", methods=["GET"])
+def mbsa():
+    return render_template('index.html')
 
 @app.route('/api', methods=['GET'])
 def get_data():
