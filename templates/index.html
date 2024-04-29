@@ -1,0 +1,81 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Vegetation Loss Analysis</title>
+    <script src="//cdn.rawgit.com/muicss/sentineljs/0.0.7/dist/sentinel.min.js"></script>
+    <script>
+        const instanceId = '384dcf70-1056-4d14-90a1-4fba60cfdd09'; // Replace with your Sentinel Hub instance ID
+        const latitude = 19.225030;
+        const longitude = 73.096630;
+        const radius = 200; // in meters
+
+        // Create Sentinel Hub request
+        const sentinelHubRequest = new SentinelHubRequest.instance(
+            instanceId,
+            latitude,
+            longitude,
+            radius,
+            {
+                dataFilter: {
+                    timeRange: {
+                        from: '2023-01-01',
+                        to: '2024-02-01'
+                    },
+                    maxCloudCoverage: 10 // Adjust as needed
+                },
+                source: {
+                    dataCollections: ['S2L1C']
+                }
+            }
+        );
+
+        // Perform NDVI calculation
+        sentinelHubRequest.getResults().then(response => {
+            const bands = response.data[0].bands;
+            const redBand = bands.find(band => band.name === 'B04');
+            const nirBand = bands.find(band => band.name === 'B08');
+            const ndviData = [];
+
+            for (let i = 0; i < redBand.data.length; i++) {
+                const red = redBand.data[i];
+                const nir = nirBand.data[i];
+                const ndvi = (nir - red) / (nir + red);
+                ndviData.push(ndvi);
+            }
+
+            // Use ndviData for visualization or further analysis
+            console.log(ndviData);
+        }).catch(error => {
+            console.error('Error fetching satellite imagery:', error);
+        });
+    </script>
+</head>
+<body>
+    HTML content goes here 
+</body>
+</html> -->
+
+<!doctype html>
+<html>
+  <head>
+    <style id="sentinel-css"></style>
+    <script src="https://cdn.rawgit.com/muicss/sentineljs/0.0.7/dist/sentinel.min.js"></script>
+    <script>
+      // use the `sentinel` global object
+      sentinel.on('.my-div', function(el) {
+        el.innerHTML = 'The sentinel is always watching.';
+      });
+
+      // add a new div to the DOM
+      function addDiv() {
+        var newEl = document.createElement('div');
+        newEl.className = 'my-div';
+        document.body.appendChild(newEl);
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="addDiv();">Add another DIV</button>
+    <div class="my-div"></div>
+  </body>
+</html>
