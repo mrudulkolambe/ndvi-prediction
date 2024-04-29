@@ -8,9 +8,9 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
-def mbsa():
-    return render_template('index.html')
+# @app.route("/", methods=["GET"])
+# def mbsa():
+#     return render_template('index.html')
 
 @app.route('/api', methods=['GET'])
 def get_data():
@@ -76,3 +76,9 @@ def calculate_trees_needed_for_ndvi(current_ndvi, desired_ndvi, area_size_sqm, c
     num_trees = area_covered_needed / tree_coverage_sqm
     num_trees /= (spacing_m ** 2)
     return round(num_trees)
+
+
+
+if __name__ == '__main__':
+    # Run the Flask app
+    app.run(debug=True)  # Run the app in debug mode
